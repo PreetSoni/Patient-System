@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Patient System</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- Material Design Bootstrap -->
+    <script type="text/javascript" src="js/mdb.js"></script>
+	<script>
+		$(document).ready(function () {
+$("#submit").click(function() {
+var fname = $("#patient-fname").val();
+var lname = $("#patient-lname").val();
+var age = $("#patient-age").val();
+var dob = $("#patient-dob").val();
+var e = document.getElementById("patient-gender");
+var gender = e.options[e.selectedIndex].value;
+var phone = $("#patient-phone").val();
+var info = $("#patient-info").val();
+if (fname == '' || lname == '' || age == '' || dob == ''|| gender == '' || phone == '' || info == '') {
+alert("Please fill all the fields....!!");
+} else {
+// Returns successful data submission message when the entered information is stored in database.
+$.post("process.php", {
+P_fname: fname,
+P_lname: lname,
+P_age: age,
+P_dob: dob,
+P_gender: gender,
+P_phone: phone,
+P_info: info
+}, function(data) {
+alert(data);
+$('#form')[0].reset(); // To reset form fields
+});
+}
+});
+});
+	</script>
+	
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-md-12">
+			&nbsp;
+			<br>
+			<br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">			
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6 card hoverable">
+			<div class="row">
+			<div class="col-md-10">
+				<center><h4 style="margin-left: 100px;">New Patient Details </h4></center>
+			</div>
+			<div class="col-md-2 searchList">
+				<a href="list.html"><i class="fa fa-search" aria-hidden="true"></i></a>
+			</div>
+			</div>
+			<form id="form" name="form" ng-app="myapp" ng-controller="addPatientcontroller">
+			  <div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="input-field col-md-5">
+				  <input id="patient-fname" name="patient-fname" type="text" class="validate" ng-model="patientData.fname" required>
+				  <label for="patient-fname">First Name</label>
+				</div>
+				<div class="input-field col-md-5">
+				  <input id="patient-lname" name="patient-lname"  type="text" class="validate" ng-model="patientData.lname" required>
+				  <label for="patient-lname">Last Name</label>
+				</div>
+				<div class="col-md-1">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="input-field col-md-5">
+				  <input id="patient-age" name="patient-age" type="text" class="validate" ng-model="patientData.age" required>
+				  <label for="patient-age">Age</label>
+				</div>
+				<div class="input-field col-md-5">
+				  
+				  <input id="patient-dob" name="patient-dob" type="text" class="validate" ng-model="patientData.dob" placeholder="DD-MM-YYYY" required>
+				  <label for="patient-dob">Date of birth</label>
+				</div>
+				<div class="col-md-1">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="input-field col-md-5">
+				 <select id="patient-gender" name="patient-gender" class="validate" ng-model="patientData.gender" required>
+                    <option value="" disabled selected>Gender</option>
+                    <option value="Female">Female</option>	
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                </select>
+				</div>
+				<div class="input-field col-md-5">
+				  <input id="patient-phone" name="patient-phone" type="text" class="validate" ng-model="patientData.phone" required>
+				  <label for="patient-phone">Phone</label>
+				</div>
+				<div class="col-md-1">
+				</div>
+			  </div>
+			  <div class="row">
+			  <div class="col-md-1">
+				</div>
+				<div class="input-field col-md-10">
+				  <textarea id="patient-info" name="patient-info" class="materialize-textarea" ng-model="patientData.info" required></textarea>
+				  <label for="patient-info">Information</label>
+				</div>
+				<div class="col-md-1">
+				</div>
+			  </div>
+			   <div class="row">
+			   <div class="input-field col-md-5">
+			   </div>
+				<div class="input-field col-md-6">
+					<input id="submit" type="submit" class="btn btn-success"/>
+				</div>
+				<div class="col-md-12">
+					&nbsp;
+					<br>			
+				</div>
+			</div>
+			</form>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+  </div>
+    
+	
+	
+
+</body>
+
+</html>

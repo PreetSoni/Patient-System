@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PatientList">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List | Patient System</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-md-12">
+			&nbsp;
+			<br>
+			<br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">			
+			<div class="col-md-3">
+				
+			</div>
+			<div class="col-md-6 card hoverable">
+			<div class="row">
+			<div class="col-md-2">
+				<div class="input-field">
+					<a href="index.html" class="btn btn-success">+ New Patient</a>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-6">
+			<h4> Patient List </h4>
+			</div>
+			</div>
+			<form>
+			  <div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="input-field col-md-10">
+				  <input id="PatientSearch" type="text" class="search-criteria validate" onkeyup="myFunction()">
+				  <label for="icon_prefix">Search by Patient Name</label>
+				</div>
+				<div class="col-md-1">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="input-field col-md-10">
+						  <table id="PatientDetails" class="table table-striped" ng-controller="PatientController as PatientList">
+					<thead>
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Age</th>
+							<th>DOB</th>
+							<th>Gender</th>
+							<th>Phone</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="paitent in PatientList.paitents">
+							<td>{{paitent.fname}}</td>
+							<td>{{paitent.lname}}</td>
+							<td>{{paitent.age}}</td>
+							<td>{{paitent.dob}}</td>
+							<td>{{paitent.gender}}</td>
+							<td>{{paitent.phone}}</td>
+						</tr>
+					</tbody>
+					</table>
+					</div>
+				<div class="col-md-1">
+				</div>
+				</div>
+			</form>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+  </div>
+    <!-- SCRIPTS -->
+	<!-- Angular -->
+	<script src="js/angular.min.js"></script>
+	<script src="js/app.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- Material Design Bootstrap -->
+    <script type="text/javascript" src="js/mdb.js"></script>	
+	<script>
+		function myFunction() {
+		  // Declare variables 
+		  var input, filter, table, tr, td, i;
+		  input = document.getElementById("PatientSearch");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("PatientDetails");
+		  tr = table.getElementsByTagName("tr");
+
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+			  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			} 
+		  }
+		}
+</script>
+
+
+</body>
+
+</html>
